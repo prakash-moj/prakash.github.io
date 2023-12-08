@@ -1,0 +1,30 @@
+name: static-anlysis
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Analysis
+        uses: ministryofjustice/github-actions/terraform-static-analysis@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          scan_type: changed
+          tfsec_exclude: AWS095
+          tflint_config: $(realpath .tflint.hcl)
+          tfsec_output_file: tfsec.sarif
+          tfsec_output_format: sarif
+          checkov_external_modules: true
+          checkov_exclude: CKV_TF_1,CKV_AWS_136,CKV_AWS_51,CKV_GIT_4
+          tflint_exclude: terraform_standard_module_structure

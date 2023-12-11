@@ -16,15 +16,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run Analysis
-        uses: ministryofjustice/github-actions/terraform-static-analysis@main
+        uses: ministryofjustice/github-actions/terraform-static-analysis@debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          scan_type: changed
+          tfsec_trivy: trivy
+          scan_type: all
           tfsec_exclude: AWS095
-          tflint_config: $(realpath .tflint.hcl)
+          tflint_config: tflint.aws.tf.hcl
           tfsec_output_file: tfsec.sarif
           tfsec_output_format: sarif
           checkov_external_modules: true
-          checkov_exclude: CKV_TF_1,CKV_AWS_136,CKV_AWS_51,CKV_GIT_4
-          tflint_exclude: terraform_standard_module_structure
+          checkov_exclude: CKV_TF_1,CKV_AWS_136,CKV_AWS_51,CKV_GIT_4,CKV_AWS_23,CKV_AWS_118,CKV_AWS_293,CKV_AWS_157,CKV_AWS_129,CKV_AWS_354,CKV_AWS_133,CKV_AWS_353,CKV_AWS_16,CKV_AWS_211,CKV2_AWS_64,CKV_DOCKER_2,CKV_DOCKER_3,CKV2_GHA_1

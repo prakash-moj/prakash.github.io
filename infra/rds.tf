@@ -5,7 +5,7 @@ module "rds" {
   vpc_name = var.vpc_name
 
   application              = "test"
-  environment_name         = "development"
+  environment_name         = var.environment
   is_production            = false
   infrastructure_support   = "support"
   team_name                = "cloud"

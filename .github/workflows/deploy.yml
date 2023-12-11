@@ -21,7 +21,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tfsec_trivy: trivy
-          scan_type: changed
+          scan_type: all
           tfsec_exclude: AWS095
           tflint_config: tflint.aws.tf.hcl
           tfsec_output_file: tfsec.sarif

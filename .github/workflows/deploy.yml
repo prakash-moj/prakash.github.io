@@ -22,7 +22,7 @@ jobs:
         with:
           scan_type: changed
           tfsec_exclude: AWS095
-          tflint_config: $(realpath .tflint.hcl)
+          tflint_config: tflint.aws.tf.hcl
           tfsec_output_file: tfsec.sarif
           tfsec_output_format: sarif
           checkov_external_modules: true
